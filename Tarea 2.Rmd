@@ -31,7 +31,6 @@ inspect(reglas2[0:100])
 ```
 
 ```{r}
-data3 <- subset(data, DEPARTAMENTO == 1)
 data3 <- subset(data, PCP6 == 1)
 data3 <- data3[, -1]
 reglas3 <- apriori(data3, parameter = list(support=0.4, confidence=0.75 ))
