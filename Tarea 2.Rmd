@@ -1,0 +1,38 @@
+```{r}
+install.packages("arules")
+library(arules)
+
+data <- read.csv('C:\\Users\\selvi\\Documents\\Maestria\\NTRODUCCIÓN A LA MINERÍA DE DATOS\\db_csv_\\db_csv_\\PERSONA_BDP.csv', sep=",")
+
+
+data
+```
+```{r}
+unique(data$PEA)
+sum(is.na(data$PEA))
+
+sapply(data, function(x) length(unique(x)))
+
+data$PEA <- as.factor(data$PEA)
+data$POCUPA <- as.factor(data$POCUPA)
+data$PEI <- as.factor(data$PEI)
+data$PEI <- as.factor(data$PEI)
+
+reglas1 <- apriori(data, parameter = list(support=0.5, confidence=0.8 ))
+
+inspect(reglas1[0:100])
+inspect(reglas1[300:400])
+```
+```{r}
+reglas2 <- apriori(data, parameter = list(support=0.4, confidence=0.7 ))
+
+inspect(reglas2[0:100])
+```
+
+```{r}
+reglas3 <- apriori(data, parameter = list(support=0.4, confidence=0.75 ))
+inspect(reglas3[0:100])
+
+```
+
+
