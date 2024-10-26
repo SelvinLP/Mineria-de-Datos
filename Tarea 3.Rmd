@@ -1,0 +1,44 @@
+```{r}
+install.packages("arules")
+library(arules)
+
+data <- read.csv('C:\\Users\\selvi\\Documents\\Maestria\\NTRODUCCIÓN A LA MINERÍA DE DATOS\\db_csv_\\db_csv_\\PERSONA_BDP.csv', sep=",")
+
+data
+
+```
+
+1.
+```{r}
+
+datamsc <- subset(data, PCP24 == 1)
+
+datamsc2 <- datamsc[, c(16,17,51,77,45,46,47,48)]
+
+reglas <- fim4r(datamsc2, method = "fpgrowth", target="rules", supp = .2, conf = .5)
+reglasframe <- as(reglas, "data.frame")
+
+```
+
+2.
+```{r}
+datamsc2 <- subset(data, PCP24 == 1)
+
+datamsc3 <- datamsc2[, c(10,39,49,50,64)]
+
+reglas <- fim4r(datamsc3, method = "fpgrowth", target="rules", supp = .3, conf = .6)
+reglasframe <- as(reglas, "data.frame")
+```
+
+3.
+```{r}
+datams4 <- subset(data, PCP7 > 25)
+
+datamsc4 <- datams4[, c(79, 56, 62)]
+
+reglas <- fim4r(datamsc4, method = "fpgrowth", target="rules", supp = .2, conf = .5)
+reglasframe <- as(reglas, "data.frame")
+```
+
+
+
