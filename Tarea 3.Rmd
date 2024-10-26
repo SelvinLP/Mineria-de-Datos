@@ -32,7 +32,7 @@ reglasframe <- as(reglas, "data.frame")
 
 3.
 ```{r}
-datams4 <- subset(data, PCP7 > 25)
+datams4 <- subset(data, PCP7 < 20)
 
 datamsc4 <- datams4[, c(79, 56, 62)]
 
