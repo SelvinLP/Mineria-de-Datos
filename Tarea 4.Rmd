@@ -1,0 +1,51 @@
+```{r}
+install.packages("arules")
+install.packages("ggplot2")
+install.packages("dplyr")
+install.packages("tidyr")
+library(tidyr)
+library(ggplot2)
+library(dplyr)
+library(arules)
+
+data <- read.csv('C:\\Users\\selvi\\Documents\\Maestria\\NTRODUCCIÓN A LA MINERÍA DE DATOS\\db_csv_\\db_csv_\\PERSONA_BDP.csv', sep=",")
+
+data$PEA <- as.factor(data$PEA)
+data$POCUPA <- as.factor(data$POCUPA)
+data$PEI <- as.factor(data$PEI)
+
+data
+
+```
+
+```{r}
+datamsc <- subset(data, PCP7 > 20  )
+datamsc
+datamsc2 <- datamsc[, c(12,38,48,49,57)]
+datamsc2
+reglas <- apriori(datamsc2, parameter = list(support=0.2, confidence = 0.5))
+reglas
+
+
+datamsc2[] <- lapply(datamsc2, function(x) as.numeric(as.character(x)))
+datamsc2[is.na(datamsc2)] <- 0
+sum(is.na(datamsc2))
+datamsc2
+
+cluster <- kmeans(datamsc2, centers=5)
+
+```
+
+
+
+```{r}
+ggplot(datamsc2, aes(x = PCP34, y = PCP20_C, color = as.factor(cluster$cluster))) +
+  geom_point() +
+  geom_point(data = as.data.frame(cluster$centers), aes(x = PCP34, y = PCP20_C), color = "black", size = 4, shape = 17) +
+  labs(title = "Estado Conyugal vs País donde estudia",
+       x = "PCP34 Estado Conyugal",
+       y = "PCP20_C País donde estudia",
+       color = "Cluster") +
+  theme_minimal()
+```
+
