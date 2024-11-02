@@ -21,7 +21,7 @@ data
 ```{r}
 datamsc <- subset(data, PCP7 > 20  )
 datamsc
-datamsc2 <- datamsc[, c(12,38,48,49,57)]
+datamsc2 <- datamsc[, c(12,13,38,48,49,57)]
 datamsc2
 reglas <- apriori(datamsc2, parameter = list(support=0.2, confidence = 0.5))
 reglas
@@ -39,11 +39,11 @@ cluster <- kmeans(datamsc2, centers=5)
 
 
 ```{r}
-ggplot(datamsc2, aes(x = PCP34, y = PCP20_C, color = as.factor(cluster$cluster))) +
+ggplot(datamsc2, aes(x = PCP7, y = PCP20_C, color = as.factor(cluster$cluster))) +
   geom_point() +
-  geom_point(data = as.data.frame(cluster$centers), aes(x = PCP34, y = PCP20_C), color = "black", size = 4, shape = 17) +
-  labs(title = "Estado Conyugal vs País donde estudia",
-       x = "PCP34 Estado Conyugal",
+  geom_point(data = as.data.frame(cluster$centers), aes(x = PCP7, y = PCP20_C), color = "black", size = 4, shape = 17) +
+  labs(title = "Edad vs País donde estudia",
+       x = "PCP7 Edad",
        y = "PCP20_C País donde estudia",
        color = "Cluster") +
   theme_minimal()
