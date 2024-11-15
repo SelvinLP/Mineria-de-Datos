@@ -1,0 +1,79 @@
+Selvin Lisandro Aragón Pérez
+Tarea 5
+```{r}
+install.packages("rpart")
+install.packages("rpart.plot")
+
+library(rpart)
+library(rpart.plot)
+data <- read.csv('C:\\Users\\selvi\\Documents\\Maestria\\NTRODUCCIÓN A LA MINERÍA DE DATOS\\db_csv_\\db_csv_\\HOGAR_BDP.csv', sep=",")
+data
+dataheader <- names(data)
+dataheader
+```
+```{r}
+
+arbol <- rpart(AREA ~
+              PCH1 +
+              PCH2 +
+              PCH8 +
+              PCH11 +
+              PCH13 +
+              PCH15,
+               data = data, method = "class")
+
+rpart.plot(arbol, type=2, extra=0, under = TRUE, fallen.leaves = TRUE, box.palette = "BuGn", 
+           main ="Predicción de area", cex = 1)
+
+hogar <- data.frame(
+  PCH1=c(3),
+  PCH2=c(3),
+  PCH8=c(1),
+  PCH11=c(4,5,6,7,8,9,10),
+  PCH13=c(1),
+  PCH15=c(1)
+)
+
+result2 <- predict(arbol,hogar, type="class")
+result2
+```
+
+```{r}
+arbol <- rpart(AREA ~
+              PCH1 +
+              PCH2 +
+              PCH3 +
+              PCH4 +
+              PCH5 +
+              PCH6 +
+              PCH7 +
+              PCH8 +
+              PCH9_A +
+              PCH9_B +
+              PCH9_C +
+              PCH9_D +
+              PCH9_E +
+              PCH9_F +
+              PCH9_G +
+              PCH9_H +
+              PCH9_I +
+              PCH9_J +
+              PCH9_K +
+              PCH9_L +
+              PCH9_M +
+              PCH10 +
+              PCH11 +
+              PCH12 +
+              PCH13 +
+              PCH14 +
+              PCH15 +
+              PEI1 +
+              PEI2,
+               data = data, method = "class")
+
+
+rpart.plot(arbol, type=2, extra=0, under = TRUE, fallen.leaves = TRUE, box.palette = "BuGn", 
+           main ="Predicción de area", cex = 1)
+```
+
+
